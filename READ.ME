@@ -1,0 +1,94 @@
+##Checklist:
+-------------
+
+* Have the proper notation for squares
+* RESTful API
+* Responds with JSON
+* Response is array of paths
+* Squares separated by - 
+* No repeats in any series of moves
+* Order paths from shortest to longest
+* Ignore any paths longer than 6 squares
+* Empty array if no path less than 6 squares
+* Some response code if bad input format
+* Some response code if input is not a square
+* Include tests
+* Make it easy to run
+* Push to Heroku (if possible)
+
+
+##Notes:
+-------
+
+Idea of a square is like idea of a cell in Conways Game of Life?
+Shall make a square class and a game class?
+
+Make a hash of squares matched to arrays of possible moves?
+
+Use recursion to follow all the paths - like in the Udacity search engine recursion lesson...
+
+What would base case be? Base case would be there are no next squares?
+Or when it gets to the 'end' one?
+Or when it gets more than 6?
+
+
+##My Questions:
+--------------
+
+* Can I use Sinatra for my API?
+
+##Question:
+---------
+
+A Knight’s API
+
+Givens
+
+- Standard 8x8 chessboard, and this simple notation for squares:
+
+http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SCD_algebraic_notation.svg/242px-SCD_algebraic_notation.svg.png
+
+- Standard rules of movement for the Knight piece as outlined on Wikipedia:
+
+http://en.wikipedia.org/wiki/Knight_(chess)#Movement
+
+The Challenge
+
+Write a simple restful API (ie, think about status codes and verbs), which responds with JSON when provided with a starting position and ending position as parameters on the request (eg, start=a1 and end=d4).
+
+The response should be one of:
+
+a) an array of possible series of moves for a knight to get from start to end square, eg,
+
+[‘a1-b3-d4’, ‘a1-c2-b4’, ...]
+
+NOTE:
+
+Each square the knight travels should be listed with dashes between. There should be no looping paths with the same square repeated again in the same series of moves. The paths should be in order from shortest to longest. Ignore any paths which are longer than 6 squares, including the start and end square.
+
+b) An empty array if there is no path within 6 squares.
+
+c) An appropriate status code and response message in case of bad data / format.
+
+Examples
+
+The below examples use a short format of: start square, end square => result. Your solution will use request parameters for the request, and JSON for the result.
+
+a1, a1 => bad request as any path will have a1 repeated
+
+a1, h1 => [] (empty as can’t do in move limit)
+
+a1, d4 => [a1-b3-d4, a1-c2-d4, a1-c2-e3-f5-d4, a1-c2-a3-b5-d4, a1-c2-b4-c6-d4, a1-c2-e1-f3-d4, a1-b3-d2-f3-d4, a1-b3-c1-e2-d4, a1-b3-a5-c6-d4, a1-b3-c5-e6-d4]
+
+
+Guidelines
+
+- Simple neat solutions, with clear naming and tests are prefered.
+
+- API and tests should be written in Ruby, and easy to set up and run with appropriate Ruby version (and gems if required)
+
+- Don’t worry about performance
+
+- Bonus points for putting your solution up on Heroku or similar service
+- If you’re unsure of anything or are feeling stuck, please ask.
+
