@@ -24,23 +24,28 @@ end
 
 new_board = Board.new(8,8)
 
-# puts new_board.squares.length
-
 def next_squares(square)
   possible_moves = []
-  possible_moves << Square.new(square.x+2,square.y+1)
-  possible_moves << Square.new(square.x-2,square.y-1)
-  possible_moves << Square.new(square.x+2,square.y-1)
-  possible_moves << Square.new(square.x-2,square.y+1)
-  possible_moves << Square.new(square.x-1,square.y+2)
-  possible_moves << Square.new(square.x+1,square.y+2) 
-  possible_moves << Square.new(square.x-1,square.y-2)
-  possible_moves << Square.new(square.x+1,square.y-2)
+  
+  next_x_values = [2,-2,2,-2,-1,1,-1,1]
+  next_y_values = [1,-1,-1,1,2,2,-2,-2]
+  
+  for i in (0..7)
+    next_x = square.x + next_x_values[i]
+    next_y = square.y + next_y_values[i]
+    if next_x >=0 && next_y >=0
+      possible_moves << Square.new(next_x,next_y)
+    end
+  end
   
   possible_moves.map! {|square| square.chess_name}
   
-  # next have to make it so that possible moves doesn't include things that are off the board
-  return possible_moves
+  return possible_moves 
 end
 
-puts next_squares(new_board.squares[0])
+
+puts next_squares(new_board.squares[28])
+
+
+
+
