@@ -8,6 +8,13 @@ get '/' do
   erb :home
 end
 
+
+post '/results' do
+  @start_square = params[:start_square]
+  @end_square = params[:end_square]
+  erb:results
+end
+
 def squares_possible_moves(board)
   possible_moves = {}
   x_moves = [2,-2,2,-2,-1,1,-1,1]
