@@ -1,5 +1,12 @@
 require_relative 'square'
 require_relative 'board'
+require 'sinatra'
+
+
+
+get '/' do
+  erb :home
+end
 
 def squares_possible_moves(board)
   possible_moves = {}
