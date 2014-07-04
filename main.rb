@@ -1,6 +1,7 @@
 require_relative 'square'
 require_relative 'board'
 require 'sinatra'
+require 'json'
 
 
 
@@ -12,8 +13,19 @@ end
 post '/results' do
   @start_square = params[:start_square]
   @end_square = params[:end_square]
-  erb:results
+  @new_board = Board.new(8,8)
+  @path =  build_paths(@new_board, @start_square, @end_square)
+  # erb:results
+  @path.to_json
+
 end
+
+get '/example.json' do
+  content_type :json
+  { :key1 => 'value1', :key2 => 'value2' }.to_json
+end
+
+
 
 def squares_possible_moves(board)
   possible_moves = {}
@@ -46,23 +58,20 @@ end
 def build_paths(board, start_square, end_square)
   all_paths = []
   options = find_options(board, start_square)
-  for i in options
-    path =[]
-    if path.include? i or i.chess_name == end_square
-      all_paths << path
+  for i in (0..options.length)
+    all_paths[i]=[]
+    all_paths[i] << options[i]
+    if all_paths[i].include? options[i] or options[i].chess_name == end_square
     else
       # build_paths(board, i.chess_name, end_square)
-      path << i
+      
     end
+    
   end
-  # return all_paths
+  all_paths
 end
 
 
-new_board = Board.new(8,8)
-start_square = 'A1'
-end_square = 'C6'
-puts build_paths(new_board, start_square, end_square)
 
 
 
