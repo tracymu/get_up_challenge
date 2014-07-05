@@ -8,13 +8,14 @@
 
   <body>
     <div class="container">
-  <form class="form-inline" role="form" action="/results" method="post">
-    <div class="form-group">
-	    <input type="text" class="form-control" name="start_square" placeholder="Enter Start Square" autofocus="autofocus"></textarea>
-	    <input type="text" class="form-control" name="end_square" placeholder="Enter End Square" autofocus="autofocus"></textarea>
-	    <input type="submit">
-	  </div>
-  </form>
+    	<%= flash[:error] %>
+		  <form class="form-inline" role="form" action="/results" method="post">
+		    <div class="form-group">
+			    <input type="text" class="form-control" name="start_square" placeholder="Enter Start Square" autofocus="autofocus"></textarea>
+			    <input type="text" class="form-control" name="end_square" placeholder="Enter End Square" autofocus="autofocus"></textarea>
+			    <input type="submit">
+			  </div>
+		  </form>
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -2,23 +2,26 @@ require_relative 'square'
 require_relative 'board'
 require 'sinatra'
 require 'json'
+require 'sinatra/flash'
+require 'set'
+ 
+enable :sessions
 
 get '/' do
   erb :home
 end
 
-post '/results' do
-  @start_square = params[:start_square]
-  @end_square = params[:end_square]
-  @new_board = Board.new(8,8)
-  @path =  build_paths(@new_board, @start_square, @end_square)
-  # erb:results
-  @path.to_json
-end
-
-get '/example.json' do
-  content_type :json
-  { :key1 => 'value1', :key2 => 'value2' }.to_json
+post '/results' do   
+    @start_square = params[:start_square].upcase
+    @end_square = params[:end_square].upcase
+    @new_board = Board.new(8,8)   
+  if check_input(@start_square, @end_square, @new_board)
+    @path =  build_paths(@new_board, @start_square, @end_square)
+    @path.to_json
+  else
+    flash[:error] = "Please only enter square names from a 8x8 board e.g. C3"  
+    redirect '/'
+  end
 end
 
 def squares_possible_moves(board)
@@ -36,6 +39,15 @@ def squares_possible_moves(board)
     end
   end    
   possible_moves
+end
+
+def check_input(start_square, end_square, board)
+  chess_squares = Set[]
+  for square in board.squares
+    chess_squares << square.chess_name
+  end
+  inputs = Set[start_square, end_square]
+  inputs.subset? chess_squares
 end
 
 def find_options(board, start_input)
@@ -57,9 +69,11 @@ def build_paths(board, start_square, end_square)
     all_paths[i] << options[i]
     if all_paths[i].include? options[i] or options[i].chess_name == end_square
     else
-       build_paths(board, i.chess_name, end_square)
+      # build_paths(board, i.chess_name, end_square)
+      
     end
-  end 
+    
+  end
   # This is returning something insane! Need to fix up what it returns
 end
 
