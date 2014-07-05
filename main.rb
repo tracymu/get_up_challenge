@@ -54,31 +54,31 @@ def find_options(board, start_input)
   next_moves = squares_possible_moves(board)
   next_moves.each_key do |square| 
     if start_input == square.chess_name
-       options = next_moves[square]
+       @options = next_moves[square]
     end
-    # options.map! {|square| square.chess_name}
-    return options
   end
+  @options.map! {|square| square.chess_name}
 end
+
 
 def build_paths(board, start_square, end_square)
-  all_paths = []
+  all_paths =[]
   options = find_options(board, start_square)
-  for i in (0..options.length)
+  for i in (0..(options.length-1))
     all_paths[i]=[]
-    all_paths[i] << options[i]
-    if all_paths[i].include? options[i] or options[i].chess_name == end_square
+    if all_paths[i].include? options[i] or options[i] == end_square or all_paths[i].length > 6
+      all_paths[i] << options[i]
     else
-      # build_paths(board, i.chess_name, end_square)
-      
-    end
-    
+      all_paths[i] << options[i]      
+      # build_paths(board, options[i], end_square)
+    end    
   end
-  # This is returning something insane! Need to fix up what it returns
+  return options
 end
 
+# new_board = Board.new(8,8)
+# start_square = 'A1'
+# end_square = 'B1'
 
-
-
-
+# puts build_paths(new_board, start_square, end_square)
 
