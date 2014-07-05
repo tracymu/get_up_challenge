@@ -3,12 +3,9 @@ require_relative 'board'
 require 'sinatra'
 require 'json'
 
-
-
 get '/' do
   erb :home
 end
-
 
 post '/results' do
   @start_square = params[:start_square]
@@ -17,15 +14,12 @@ post '/results' do
   @path =  build_paths(@new_board, @start_square, @end_square)
   # erb:results
   @path.to_json
-
 end
 
 get '/example.json' do
   content_type :json
   { :key1 => 'value1', :key2 => 'value2' }.to_json
 end
-
-
 
 def squares_possible_moves(board)
   possible_moves = {}
@@ -63,12 +57,10 @@ def build_paths(board, start_square, end_square)
     all_paths[i] << options[i]
     if all_paths[i].include? options[i] or options[i].chess_name == end_square
     else
-      # build_paths(board, i.chess_name, end_square)
-      
+       build_paths(board, i.chess_name, end_square)
     end
-    
-  end
-  all_paths
+  end 
+  # This is returning something insane! Need to fix up what it returns
 end
 
 
