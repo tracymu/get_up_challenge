@@ -85,6 +85,6 @@ def build_paths(board, start_square, end_square)
         all_paths[i]<< start_square + '-' + options[i] + '-' + j
       end     
     end 
-  end
-  return all_paths
+  end 
+  return all_paths.sort_by {|path| path.length}
 end
