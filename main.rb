@@ -71,6 +71,7 @@ end
 
 def build_paths(board, start_square, end_square)
   all_paths =[]
+  return all_paths if start_square == end_square
   options = find_options(board, start_square)
    (0..(options.length-1)).each do |i|
     all_paths[i]=[]
