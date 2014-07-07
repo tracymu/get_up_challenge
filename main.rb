@@ -9,7 +9,7 @@ enable :sessions
 
 # I don't have experience making APIs
 # I did read up on it, but in the time I had, I couldn't create it
-# to my satisfaction. So instead, I created a html page to take
+# to my satisfaction. So instead, I created a html page to take the
 # start and end values.
 get '/' do
   erb :home
@@ -65,10 +65,6 @@ def find_options(board, start_input)
   @options.map! {|square| square.chess_name}
 end
 
-def iterate_through(board, start_square, end_square)
-  # I wanted to create this new method to use recursively
-end
-
 def build_paths(board, start_square, end_square)
   all_paths =[]
   return all_paths if start_square == end_square
@@ -78,8 +74,9 @@ def build_paths(board, start_square, end_square)
     if all_paths[i].include? options[i] or options[i] == end_square or all_paths[i].length > 6
       all_paths[i] << options[i]
     else
-      # I think recursion is needed, but this below is no good. 
+      # I think recursion is needed, but I didn't complete it. 
       # build_paths(board, options[i], end_square)
+      # I would probably need another separate method to keep calling.
            
       # This code below is so I can at least have something to return. 
       # I realise it isn't an answer to the question.
