@@ -2,21 +2,17 @@
 <html>
   <head>
     <title>A Knight's API</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
 
   <body>
     <div class="container">
     	<%= flash[:error] %>
-		  <form class="form-inline" role="form" action="/results" method="post">
-		    <div class="form-group">
-			    <input type="text" class="form-control" name="start_square" placeholder="Enter Start Square" autofocus="autofocus"></textarea>
-			    <input type="text" class="form-control" name="end_square" placeholder="Enter End Square" autofocus="autofocus"></textarea>
+		  <form role="form" action="/results" method="post">
+		    <div>
+			    <input type="text" name="start_square" placeholder="Enter Start Square" autofocus="autofocus"></textarea>
+			    <input type="text" name="end_square" placeholder="Enter End Square" autofocus="autofocus"></textarea>
 			    <input type="submit">
 			  </div>
 		  </form>
     </div>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
   </body>
