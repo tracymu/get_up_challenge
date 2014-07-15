@@ -59,7 +59,6 @@ end
 
 def find_options(board, start_input)
   next_moves = squares_possible_moves(board)
-  # Find the next square options for a particular square
   next_moves.each_key do |square| 
     if start_input == square.chess_name
        @options = next_moves[square]
@@ -67,6 +66,29 @@ def find_options(board, start_input)
   end
   @options.map! {|square| square.chess_name}
 end
+
+def move_knight(current_position, end_square, prior_moves)
+  if prior_moves > 6
+    # add prior_moves to collection of paths
+  else
+    next_square = find_options(board, current_position)
+    next_square.each do |square|
+      if square == end_square
+        prior_moves << square
+        # add prior_moves to collection of paths
+      elsif prior_moves.include? square
+        # discard this path
+      else
+        move_knight(square, end_square, prior_moves)
+      end   
+    end  
+  end  
+  
+  
+  
+end
+
+# Somehow call move_knight in the method below?
 
 def build_paths(board, start_square, end_square)
   all_paths =[]

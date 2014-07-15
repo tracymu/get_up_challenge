@@ -1,4 +1,35 @@
+Pseudo Code Help
+----------------
+
+ function MoveKnight(current_position, target, prior_moves) 
+{
+  # stop recursion and return empty if gone too deep (too many moves)
+
+  foreach(move in PossibleMoves(current_position)) 
+  {
+    if (move == target) 
+    {
+      #   handle reaching the destination 
+    }
+    elsif !prior_moves.include?(move)
+    {
+       # call MoveKnight recursively  
+    }
+  }
+
+
+
+Questions
+---------
+
+When you say testing - at what points would we do testing?
+
+API input?
+
+
+
 A Knight's API
+--------------
 
 I don't have experience making APIs. I did read up on it, but in the time I had, I couldn't create it to my satisfaction. So instead, I created a html page to take the start and end values.
 
