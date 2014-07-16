@@ -18,22 +18,42 @@ Pseudo Code Help
   }
 
 
+Output:
+
+The output would need to look something like this
+['a2-a1-a3-a2', 'd2-e3-a2-a8','and more strings', 'and more strings']
+
+
+Moveknight method:
+current_position = current square
+target = end square
+prior_moves = in this path?
+so prior_moves is building up one of the strings.
+
+
+But the first time you had run the move_knight method, you would already need a 'prior moves' to pass in.
+
 
 Questions
 ---------
 
-When you say testing - at what points would we do testing?
 
-API input?
+API Input: It's a get request expecting 2 parameters? and you just write the parameters in the URL -> is that right?
+
+This main.rb file - more things need to be moved out into their own classes?
+
+Methods are too long.
+
+I probably made it too complicated by making chess names in the game. 
+Maybe should have just had a chess name interpreter from input...?
+
+The x_moves, y_moves array -> there is definitely going to be a better way to do this
+
+Testing: proper testing? e.g. with minitest? Or just tests to run examples?
 
 
 
-A Knight's API
---------------
 
-I don't have experience making APIs. I did read up on it, but in the time I had, I couldn't create it to my satisfaction. So instead, I created a html page to take the start and end values.
-
-I also was not able to return the asked for solution, but instead I built as much as I could, and tried to address as many things in the question as possible (see checklist below).
 
 
 ## How to Run

@@ -29,7 +29,7 @@ end
 
 def squares_possible_moves(board)
   possible_moves = {}
-  # The two arrays represent the possible moves in one plane.
+  # Rewrite these two lines
   x_moves = [2,-2,2,-2,-1,1,-1,1]
   y_moves = [1,-1,-1,1,2,2,-2,-2]
   
@@ -61,56 +61,47 @@ def find_options(board, start_input)
   next_moves = squares_possible_moves(board)
   next_moves.each_key do |square| 
     if start_input == square.chess_name
-       @options = next_moves[square]
-    end
+      @options = next_moves[square]
+    end    
   end
   @options.map! {|square| square.chess_name}
 end
 
-def move_knight(current_position, end_square, prior_moves)
-  if prior_moves > 6
-    # add prior_moves to collection of paths
-  else
-    next_square = find_options(board, current_position)
-    next_square.each do |square|
+def move_knight(current_position, end_square, prior_moves, board)
+  # how to pass board in? as another parameter? as a @variable?
+  puts current_position
+  next_squares = find_options(board, current_position)
+  paths =[]
+  if prior_moves.length > 6
+    return
+  else    
+    next_squares.each do |square|
       if square == end_square
         prior_moves << square
-        # add prior_moves to collection of paths
+        paths << prior_moves
+        return prior_moves
       elsif prior_moves.include? square
-        # discard this path
+        return
       else
-        move_knight(square, end_square, prior_moves)
+        prior_moves = prior_moves + move_knight(square, end_square, prior_moves, board)
       end   
     end  
-  end  
-  
-  
-  
+  end   
+  return paths  
 end
-
-# Somehow call move_knight in the method below?
 
 def build_paths(board, start_square, end_square)
   all_paths =[]
   return all_paths if start_square == end_square
-  # Find the next moves for the start_square
-  options = find_options(board, start_square)
-  (0..(options.length-1)).each do |i|
-    all_paths[i]=[]
-    if all_paths[i].include? options[i] or options[i] == end_square or all_paths[i].length > 6
-      all_paths[i] << options[i]
-    else
-    # build_paths(board, options[i], end_square)
-    # I wanted to use recursion here, but I couldn't make it work.
-    # Maybe I needed another separate method to keep calling.
-         
-    # This code below is so I can at least have something to return. 
-    # I realise it isn't an answer to the question.
-      next_options = find_options(board, options[i])
-      next_options.each do |j|
-        all_paths[i]<< start_square + '-' + options[i] + '-' + j
-      end
-    end
-  end
-  return all_paths.sort_by {|path| path.length}
+  first_path = [start_square]
+  move_knight(start_square, end_square, first_path,board)
 end
+
+
+
+  # @start_square = "A1"
+  # @end_square ="A2"
+  # @new_board = Board.new(8,8)
+  # build_paths(@new_board, @start_square, @end_square)
+    
+
